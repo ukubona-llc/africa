@@ -1,0 +1,244 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--ink:#0a0a08;--paper:#f5f2eb;--amber:#c17f24;--amber-light:#f5e6c8;
+--muted:#6b6860;--divider:#ddd9d0;--red:#c0392b;--green:#1a6b3c;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--paper);min-height:100vh;padding:0}
+.page{max-width:680px;margin:0 auto;padding:2rem 1.5rem 3rem}
+.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:0.5px solid rgba(245,242,235,0.15)}
+.logo-block{}
+.logo-word{font-family:'DM Serif Display',serif;font-size:1.75rem;color:var(--paper);letter-spacing:-.5px}
+.logo-sub{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber);letter-spacing:.15em;text-transform:uppercase;margin-top:2px}
+.header-meta{text-align:right}
+.header-date{font-family:'DM Mono',monospace;font-size:.65rem;color:rgba(245,242,235,0.4);letter-spacing:.05em}
+.header-event{font-size:.75rem;color:rgba(245,242,235,0.5);margin-top:3px}
+
+.lede{font-family:'DM Serif Display',serif;font-size:1.45rem;line-height:1.35;color:var(--paper);margin-bottom:.75rem;font-style:italic}
+.lede em{font-style:normal;color:var(--amber)}
+.sublede{font-size:.85rem;color:rgba(245,242,235,0.55);line-height:1.6;margin-bottom:2.5rem;max-width:560px}
+
+.section-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:.9rem}
+.divider{border:none;border-top:.5px solid rgba(245,242,235,0.1);margin:2rem 0}
+
+.chain{display:flex;align-items:center;gap:0;margin-bottom:2.5rem;flex-wrap:nowrap;overflow-x:auto}
+.chain-node{flex:1;min-width:80px;padding:.7rem .5rem .6rem;text-align:center;position:relative}
+.chain-node:first-child{border-radius:6px 0 0 6px}
+.chain-node:last-child{border-radius:0 6px 6px 0}
+.cn-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:3px}
+.cn-main{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--paper)}
+.cn-sub{font-size:.65rem;color:rgba(245,242,235,0.45);margin-top:2px;font-style:italic}
+.cn-arrow{width:18px;flex-shrink:0;text-align:center;color:var(--amber);font-size:.85rem;opacity:.7}
+.t0{background:rgba(193,127,36,.08);border:.5px solid rgba(193,127,36,.2)}
+.t1{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
+.t2{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
+.t3{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
+.t4{background:rgba(193,127,36,.12);border:.5px solid rgba(193,127,36,.3)}
+
+.jac-wrap{margin-bottom:2.5rem}
+.jac-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:2px;font-family:'DM Mono',monospace}
+.jac-corner{background:transparent}
+.jac-col-h{font-size:.55rem;color:var(--amber);opacity:.7;text-align:center;padding:4px 2px;letter-spacing:.04em}
+.jac-row-h{font-size:.55rem;color:rgba(245,242,235,.5);padding:4px 6px 4px 0;display:flex;align-items:center;white-space:nowrap;font-style:italic}
+.jac-cell{padding:5px 3px;text-align:center;font-size:.7rem;border-radius:3px;font-weight:500}
+.jac-hi{background:rgba(193,127,36,.28);color:#f5c469}
+.jac-md{background:rgba(193,127,36,.12);color:rgba(245,242,235,.7)}
+.jac-lo{background:rgba(245,242,235,.04);color:rgba(245,242,235,.3)}
+.jac-neg{background:rgba(192,57,43,.15);color:#e07b73}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem}
+.stat-card{padding:1rem 1.1rem;border:.5px solid rgba(245,242,235,.1);border-radius:8px;background:rgba(245,242,235,.03)}
+.sc-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:.4rem}
+.sc-value{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--paper)}
+.sc-unit{font-size:.75rem;color:var(--amber);margin-left:4px}
+.sc-desc{font-size:.7rem;color:rgba(245,242,235,.35);margin-top:.3rem;line-height:1.4;font-style:italic}
+
+.proof-list{list-style:none;margin-bottom:2.5rem}
+.proof-list li{display:flex;gap:.75rem;padding:.65rem 0;border-bottom:.5px solid rgba(245,242,235,.06)}
+.proof-list li:last-child{border-bottom:none}
+.proof-icon{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber);min-width:1.2rem;padding-top:2px}
+.proof-text{font-size:.8rem;line-height:1.5;color:rgba(245,242,235,.75)}
+.proof-text strong{color:var(--paper);font-weight:500}
+
+.audience-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:2.5rem}
+.aud-card{padding:.65rem .8rem;border:.5px solid rgba(245,242,235,.08);border-radius:6px;text-align:center}
+.aud-role{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);opacity:.8;margin-bottom:4px}
+.aud-sees{font-size:.72rem;color:rgba(245,242,235,.6);line-height:1.35}
+
+.closer{border-top:.5px solid rgba(245,242,235,.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.closing-phrase{font-family:'DM Serif Display',serif;font-style:italic;font-size:.95rem;color:rgba(245,242,235,.4)}
+.contact-block{text-align:right}
+.contact-line{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(245,242,235,.35);letter-spacing:.05em;margin-bottom:2px}
+.contact-line a{color:var(--amber);text-decoration:none}
+
+@media(max-width:480px){
+  .two-col{grid-template-columns:1fr}
+  .audience-row{grid-template-columns:1fr 1fr}
+  .chain{flex-wrap:wrap}
+  .chain-node{flex:1 0 70px}
+  .cn-arrow{display:none}
+}
+</style>
+
+<div class="page">
+  <header class="header">
+    <div class="logo-block">
+      <div class="logo-word">Ukubona LLC</div>
+      <div class="logo-sub">Sovereign Computation · Kampala</div>
+    </div>
+    <div class="header-meta">
+      <div class="header-date">26 June 2026</div>
+      <div class="header-event">Old Timerz · Introductory session</div>
+    </div>
+  </header>
+
+  <p class="lede">We reduce the cost of experimentation <em>before</em> decisions become admissions, procurements, budget lines, or policy commitments.</p>
+  <p class="sublede">Africa's decisions are information-poor and action-expensive. Ukubona builds digital rehearsal environments — from individual clinical twins to national planning frameworks — so organisations can compute risk before spending capital.</p>
+
+  <div class="section-label">The compression chain · TMVES</div>
+  <div class="chain">
+    <div class="chain-node t0">
+      <div class="cn-label">Tensor</div>
+      <div class="cn-main">Raw events</div>
+      <div class="cn-sub">NDJSON append-only</div>
+    </div>
+    <div class="cn-arrow">→</div>
+    <div class="chain-node t1">
+      <div class="cn-label">Matrix</div>
+      <div class="cn-main">Jacobian</div>
+      <div class="cn-sub">sensitivity surface</div>
+    </div>
+    <div class="cn-arrow">→</div>
+    <div class="chain-node t2">
+      <div class="cn-label">Vector</div>
+      <div class="cn-main">Gradients</div>
+      <div class="cn-sub">loss landscape</div>
+    </div>
+    <div class="cn-arrow">→</div>
+    <div class="chain-node t3">
+      <div class="cn-label">Eigenmode</div>
+      <div class="cn-main">Signal</div>
+      <div class="cn-sub">variance explained</div>
+    </div>
+    <div class="cn-arrow">→</div>
+    <div class="chain-node t4">
+      <div class="cn-label">Scalar</div>
+      <div class="cn-main">Decision</div>
+      <div class="cn-sub">executive summary</div>
+    </div>
+  </div>
+
+  <div class="section-label">The Oracle · Jacobian sensitivity surface (enterprise twin, live)</div>
+  <div class="jac-wrap">
+    <div class="jac-grid">
+      <div class="jac-corner"></div>
+      <div class="jac-col-h">Scalar</div>
+      <div class="jac-col-h">Equity</div>
+      <div class="jac-col-h">Fleet health</div>
+      <div class="jac-col-h">FX rate</div>
+      <div class="jac-col-h">Risk</div>
+
+      <div class="jac-row-h">Bond yield Δ</div>
+      <div class="jac-cell jac-hi">+0.87</div>
+      <div class="jac-cell jac-md">+0.54</div>
+      <div class="jac-cell jac-lo">+0.11</div>
+      <div class="jac-cell jac-hi">+0.82</div>
+      <div class="jac-cell jac-md">+0.61</div>
+
+      <div class="jac-row-h">Fleet telemetry</div>
+      <div class="jac-cell jac-md">+0.48</div>
+      <div class="jac-cell jac-lo">+0.22</div>
+      <div class="jac-cell jac-hi">+0.79</div>
+      <div class="jac-cell jac-lo">+0.09</div>
+      <div class="jac-cell jac-neg">–0.31</div>
+
+      <div class="jac-row-h">Dispatch frequency</div>
+      <div class="jac-cell jac-lo">+0.19</div>
+      <div class="jac-cell jac-md">+0.43</div>
+      <div class="jac-cell jac-md">+0.55</div>
+      <div class="jac-cell jac-lo">+0.07</div>
+      <div class="jac-cell jac-neg">–0.18</div>
+
+      <div class="jac-row-h">Drug sensitivity (β)</div>
+      <div class="jac-cell jac-neg">–0.41</div>
+      <div class="jac-cell jac-neg">–0.28</div>
+      <div class="jac-cell jac-lo">+0.04</div>
+      <div class="jac-cell jac-lo">+0.01</div>
+      <div class="jac-cell jac-hi">+0.73</div>
+
+      <div class="jac-row-h">NPA planning horizon</div>
+      <div class="jac-cell jac-md">+0.52</div>
+      <div class="jac-cell jac-hi">+0.68</div>
+      <div class="jac-cell jac-lo">+0.14</div>
+      <div class="jac-cell jac-md">+0.37</div>
+      <div class="jac-cell jac-neg">–0.22</div>
+    </div>
+    <p style="font-size:.65rem;color:rgba(245,242,235,.3);margin-top:.6rem;font-family:'DM Mono',monospace">Not prediction — sensitivity. What moves what, and by how much, before capital is committed.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="stat-card">
+      <div class="sc-label">Scalar output · Enterprise twin</div>
+      <div class="sc-value">77.8<span class="sc-unit">%</span></div>
+      <div class="sc-desc">Composite decision confidence. Below 45% the system surfaces WATCH; below 30%, STOP — before the board meeting, not after.</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Clinical twin · Active</div>
+      <div class="sc-value">67<span class="sc-unit"> events</span></div>
+      <div class="sc-desc">Append-only state trace for a live patient. Polypharmacy Jacobian, pain trajectory, USPSTF gaps — all computable, all auditable.</div>
+    </div>
+  </div>
+
+  <div class="section-label">The boardroom translation layer</div>
+  <div class="audience-row">
+    <div class="aud-card">
+      <div class="aud-role">CIO</div>
+      <div class="aud-sees">Sees architecture · NDJSON pipelines, FastAPI, RLS, GitHub transparency</div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-role">CFO</div>
+      <div class="aud-sees">Sees sensitivity · Jacobian Oracle, risk surfaces, momentum per dollar</div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-role">Board</div>
+      <div class="aud-sees">Gets a scalar · 77.8% WATCH / STOP — mathematical consensus, not opinion</div>
+    </div>
+  </div>
+
+  <div class="section-label">Live deployments · Proof of execution</div>
+  <ul class="proof-list">
+    <li>
+      <span class="proof-icon">①</span>
+      <span class="proof-text"><strong>National Planning Authority of Uganda</strong> — TMVES compression applied to Uganda's 20-year development horizon. Tensor of ministry-level inputs compressed to executive scalars for cabinet-level decision rehearsal.</span>
+    </li>
+    <li>
+      <span class="proof-icon">②</span>
+      <span class="proof-text"><strong>Clinical digital twin</strong> — live patient management in Kampala. Polypharmacy Jacobian (drug × pain outcome), append-only event stream, USPSTF screening gaps surfaced automatically. Architecture generalises to MOH fleet or insurer underwriting.</span>
+    </li>
+    <li>
+      <span class="proof-icon">③</span>
+      <span class="proof-text"><strong>Enterprise twin (fleet / market)</strong> — UGX FX volatility modelled against fleet equity in real-time. Simulates capital deployment under Ugandan macroeconomic shocks before a single shilling moves.</span>
+    </li>
+    <li>
+      <span class="proof-icon">④</span>
+      <span class="proof-text"><strong>Deployment under African constraints</strong> — MTN/Airtel DPI blocking Render/Cloudflare dashboards resolved via WireGuard/WARP tunnel. Append-only NDJSON on GitHub as durable data layer. This system ships in Kampala, not in a sandbox.</span>
+    </li>
+  </ul>
+
+  <div class="section-label">Who pays for rehearsal infrastructure?</div>
+  <p style="font-size:.8rem;color:rgba(245,242,235,.6);line-height:1.65;margin-bottom:2.5rem">
+    Ministries of Health · National planning agencies · Commercial banks and insurers underwriting fleet/enterprise risk · Employers (occupational health twins) · Pension funds and DFIs requiring decision audit trails · Family offices seeking computable risk surfaces in African frontier markets.
+  </p>
+
+  <hr class="divider">
+
+  <div class="closer">
+    <div class="closing-phrase">Okubala si Kulaba.</div>
+    <div class="contact-block">
+      <div class="contact-line">ukubona-llc.github.io</div>
+      <div class="contact-line">Kampala, Uganda</div>
+    </div>
+  </div>
+</div>
