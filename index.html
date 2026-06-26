@@ -1,183 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ukubona LLC · Kenneth Legesi · 27 Jun 2026</title>
+<meta property="og:title" content="Ukubona LLC · Sovereign Computation · Kampala"/>
+<meta property="og:description" content="We reduce the cost of experimentation before decisions become admissions, procurements, budget lines, or policy commitments."/>
+<meta property="og:type" content="website"/>
+
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" media="(prefers-color-scheme:light)"/>
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image"/>
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
---ink:#0a0a08;--paper:#f5f2eb;--amber:#c17f24;--amber-light:#f5e6c8;
---muted:#6b6860;--divider:#ddd9d0;--red:#c0392b;--green:#1a6b3c;
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --bg0:#0a0a08; --bg1:#111110; --bg2:#1a1a18; --bg3:#222220;
+  --border-faint:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.08);
+  --border-md:rgba(255,255,255,0.15);
+  --text0:#f5f2eb; --text1:#b8b3a8; --text2:#706b62; --text3:#3d3933;
+  --amber:#c8921a; --amber-d:rgba(200,146,26,0.10); --amber-b:rgba(200,146,26,0.28);
+  --amber-bright:#e0a82e;
+  --red:#c0392b; --green:#1a6b3c;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Fira Mono',monospace;
+  --max:900px; --r:8px; --rl:14px;
+  --shadow:0 1px 3px rgba(0,0,0,0.5),0 4px 20px rgba(0,0,0,0.35);
 }
-body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--paper);min-height:100vh;padding:0}
-.page{max-width:680px;margin:0 auto;padding:2rem 1.5rem 3rem}
-.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:0.5px solid rgba(245,242,235,0.15)}
-.logo-block{}
-.logo-word{font-family:'DM Serif Display',serif;font-size:1.75rem;color:var(--paper);letter-spacing:-.5px}
-.logo-sub{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber);letter-spacing:.15em;text-transform:uppercase;margin-top:2px}
-.header-meta{text-align:right}
-.header-date{font-family:'DM Mono',monospace;font-size:.65rem;color:rgba(245,242,235,0.4);letter-spacing:.05em}
-.header-event{font-size:.75rem;color:rgba(245,242,235,0.5);margin-top:3px}
+[data-theme="light"] {
+  --bg0:#f0ede5; --bg1:#ffffff; --bg2:#e8e4db; --bg3:#ddd9cf;
+  --border-faint:rgba(0,0,0,0.04);
+  --border:rgba(0,0,0,0.07);
+  --border-md:rgba(0,0,0,0.13);
+  --text0:#18160f; --text1:#47433a; --text2:#857f74; --text3:#bdb8ae;
+  --amber:#8a5e08; --amber-d:rgba(138,94,8,0.08); --amber-b:rgba(138,94,8,0.24);
+  --amber-bright:#8a5e08;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.08);
+}
 
-.lede{font-family:'DM Serif Display',serif;font-size:1.45rem;line-height:1.35;color:var(--paper);margin-bottom:.75rem;font-style:italic}
-.lede em{font-style:normal;color:var(--amber)}
-.sublede{font-size:.85rem;color:rgba(245,242,235,0.55);line-height:1.6;margin-bottom:2.5rem;max-width:560px}
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:var(--sans);
+  background:var(--bg0);
+  color:var(--text0);
+  line-height:1.78;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s,color .35s;
+}
+a{color:var(--amber-bright);text-decoration:none;}
+a:hover{text-decoration:underline;}
 
-.section-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:.9rem}
-.divider{border:none;border-top:.5px solid rgba(245,242,235,0.1);margin:2rem 0}
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.site-nav{
+  position:sticky;top:0;z-index:400;
+  background:var(--bg0);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 2rem;
+  height:56px;display:flex;align-items:center;gap:.85rem;
+}
+.logo-wrap{width:32px;height:32px;flex-shrink:0;position:relative;}
+.logo-wrap img{
+  width:100%;height:100%;object-fit:contain;
+  position:absolute;top:0;left:0;transition:opacity .4s;
+  animation:spin 120s linear infinite;
+}
+.logo-dark{opacity:1;} .logo-light{opacity:0;}
+[data-theme="light"] .logo-dark{opacity:0;} [data-theme="light"] .logo-light{opacity:1;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.logo-wrap img{animation:none;}}
+.nav-brand{
+  font-family:var(--serif);font-size:.98rem;color:var(--text0);
+  flex:1;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav-date{font-family:var(--mono);font-size:.58rem;color:var(--text2);letter-spacing:.07em;margin-left:.5rem;}
+.theme-btn{
+  background:var(--bg2);border:1px solid var(--border-md);
+  border-radius:20px;padding:.26rem .8rem;
+  font-family:var(--mono);font-size:.58rem;color:var(--text1);
+  cursor:pointer;letter-spacing:.06em;flex-shrink:0;
+  transition:background .2s,color .2s;
+}
+.theme-btn:hover{background:var(--bg3);color:var(--text0);}
 
-.chain{display:flex;align-items:center;gap:0;margin-bottom:2.5rem;flex-wrap:nowrap;overflow-x:auto}
-.chain-node{flex:1;min-width:80px;padding:.7rem .5rem .6rem;text-align:center;position:relative}
-.chain-node:first-child{border-radius:6px 0 0 6px}
-.chain-node:last-child{border-radius:0 6px 6px 0}
-.cn-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-bottom:3px}
-.cn-main{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--paper)}
-.cn-sub{font-size:.65rem;color:rgba(245,242,235,0.45);margin-top:2px;font-style:italic}
-.cn-arrow{width:18px;flex-shrink:0;text-align:center;color:var(--amber);font-size:.85rem;opacity:.7}
-.t0{background:rgba(193,127,36,.08);border:.5px solid rgba(193,127,36,.2)}
-.t1{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
-.t2{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
-.t3{background:rgba(245,242,235,.04);border:.5px solid rgba(245,242,235,.08)}
-.t4{background:rgba(193,127,36,.12);border:.5px solid rgba(193,127,36,.3)}
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.outer{max-width:var(--max);margin:0 auto;padding:0 2rem 4rem;}
 
-.jac-wrap{margin-bottom:2.5rem}
-.jac-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:2px;font-family:'DM Mono',monospace}
-.jac-corner{background:transparent}
-.jac-col-h{font-size:.55rem;color:var(--amber);opacity:.7;text-align:center;padding:4px 2px;letter-spacing:.04em}
-.jac-row-h{font-size:.55rem;color:rgba(245,242,235,.5);padding:4px 6px 4px 0;display:flex;align-items:center;white-space:nowrap;font-style:italic}
-.jac-cell{padding:5px 3px;text-align:center;font-size:.7rem;border-radius:3px;font-weight:500}
-.jac-hi{background:rgba(193,127,36,.28);color:#f5c469}
-.jac-md{background:rgba(193,127,36,.12);color:rgba(245,242,235,.7)}
-.jac-lo{background:rgba(245,242,235,.04);color:rgba(245,242,235,.3)}
-.jac-neg{background:rgba(192,57,43,.15);color:#e07b73}
+/* ═══════════════════════════════════════════
+   HEADER BLOCK
+═══════════════════════════════════════════ */
+.page-header{
+  padding:3rem 0 2.5rem;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 60% at 5% 50%,rgba(200,146,26,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.ph-eyebrow{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text2);margin-bottom:.9rem;
+}
+.ph-lede{
+  font-family:var(--serif);font-size:clamp(1.4rem,4vw,2.2rem);
+  font-style:italic;line-height:1.25;color:var(--text0);
+  margin-bottom:.65rem;letter-spacing:-.02em;
+}
+.ph-lede em{font-style:normal;color:var(--amber-bright);}
+.ph-sub{
+  font-size:.875rem;color:var(--text1);max-width:68ch;
+  line-height:1.82;margin-bottom:1.75rem;
+}
+.ph-sub strong{color:var(--text0);font-weight:500;}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;
+}
+.meta-chip{
+  display:inline-flex;align-items:center;gap:.38rem;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.07em;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:.22rem .65rem;color:var(--text2);
+}
+.meta-chip.amber{
+  background:var(--amber-d);border-color:var(--amber-b);color:var(--amber-bright);
+}
 
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem}
-.stat-card{padding:1rem 1.1rem;border:.5px solid rgba(245,242,235,.1);border-radius:8px;background:rgba(245,242,235,.03)}
-.sc-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,235,.4);margin-bottom:.4rem}
-.sc-value{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--paper)}
-.sc-unit{font-size:.75rem;color:var(--amber);margin-left:4px}
-.sc-desc{font-size:.7rem;color:rgba(245,242,235,.35);margin-top:.3rem;line-height:1.4;font-style:italic}
+/* ═══════════════════════════════════════════
+   SECTION LABEL
+═══════════════════════════════════════════ */
+.sec-label{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber-bright);
+  margin-bottom:.9rem;padding-top:2rem;
+}
 
-.proof-list{list-style:none;margin-bottom:2.5rem}
-.proof-list li{display:flex;gap:.75rem;padding:.65rem 0;border-bottom:.5px solid rgba(245,242,235,.06)}
-.proof-list li:last-child{border-bottom:none}
-.proof-icon{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--amber);min-width:1.2rem;padding-top:2px}
-.proof-text{font-size:.8rem;line-height:1.5;color:rgba(245,242,235,.75)}
-.proof-text strong{color:var(--paper);font-weight:500}
+/* ═══════════════════════════════════════════
+   TMVES CHAIN
+═══════════════════════════════════════════ */
+.chain{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;}
+.chain-node{
+  flex:1;min-width:80px;padding:.8rem .6rem .7rem;text-align:center;
+}
+.chain-node:first-child{border-radius:8px 0 0 8px;}
+.chain-node:last-child{border-radius:0 8px 8px 0;}
+.cn-label{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text2);margin-bottom:4px;
+}
+.cn-main{font-family:var(--serif);font-size:.95rem;color:var(--text0);font-style:italic;}
+.cn-sub{font-size:.62rem;color:var(--text2);margin-top:3px;line-height:1.3;}
+.cn-arrow{
+  width:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  color:var(--amber-bright);font-size:.85rem;opacity:.6;
+}
+.t-tensor{background:var(--amber-d);border:.5px solid var(--amber-b);}
+.t-mid{background:rgba(255,255,255,.03);border:.5px solid var(--border);}
+.t-scalar{background:rgba(200,146,26,.14);border:.5px solid rgba(200,146,26,.35);}
 
-.audience-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:2.5rem}
-.aud-card{padding:.65rem .8rem;border:.5px solid rgba(245,242,235,.08);border-radius:6px;text-align:center}
-.aud-role{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);opacity:.8;margin-bottom:4px}
-.aud-sees{font-size:.72rem;color:rgba(245,242,235,.6);line-height:1.35}
+/* ═══════════════════════════════════════════
+   JACOBIAN GRID
+═══════════════════════════════════════════ */
+.jac-wrap{margin-bottom:.5rem;}
+.jac-grid{
+  display:grid;
+  grid-template-columns:auto repeat(5,1fr);
+  gap:2px;
+  font-family:var(--mono);
+}
+.jac-corner{background:transparent;}
+.jac-col-h{
+  font-size:.52rem;color:var(--amber-bright);opacity:.8;
+  text-align:center;padding:5px 2px;letter-spacing:.04em;
+}
+.jac-row-h{
+  font-size:.52rem;color:var(--text2);
+  padding:5px 8px 5px 0;display:flex;align-items:center;
+  white-space:nowrap;font-style:italic;
+}
+.jac-cell{
+  padding:6px 3px;text-align:center;
+  font-size:.68rem;border-radius:3px;font-weight:500;
+}
+.jc-hi{background:rgba(200,146,26,.28);color:#f5c469;}
+.jc-md{background:rgba(200,146,26,.11);color:rgba(245,242,235,.7);}
+.jc-lo{background:rgba(255,255,255,.04);color:rgba(245,242,235,.3);}
+.jc-neg{background:rgba(192,57,43,.15);color:#e07b73;}
+.jac-note{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--text2);margin-top:.6rem;line-height:1.5;
+}
 
-.closer{border-top:.5px solid rgba(245,242,235,.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
-.closing-phrase{font-family:'DM Serif Display',serif;font-style:italic;font-size:.95rem;color:rgba(245,242,235,.4)}
-.contact-block{text-align:right}
-.contact-line{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(245,242,235,.35);letter-spacing:.05em;margin-bottom:2px}
-.contact-line a{color:var(--amber);text-decoration:none}
+/* ═══════════════════════════════════════════
+   STAT CARDS
+═══════════════════════════════════════════ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.5rem;}
+.stat-card{
+  padding:1rem 1.1rem;border:.5px solid var(--border);
+  border-radius:8px;background:rgba(255,255,255,.025);
+}
+.sc-label{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text2);margin-bottom:.4rem;
+}
+.sc-value{font-family:var(--serif);font-size:1.65rem;color:var(--text0);}
+.sc-unit{font-size:.75rem;color:var(--amber-bright);margin-left:3px;}
+.sc-desc{font-size:.68rem;color:var(--text2);margin-top:.3rem;line-height:1.45;font-style:italic;}
 
-@media(max-width:480px){
-  .two-col{grid-template-columns:1fr}
-  .audience-row{grid-template-columns:1fr 1fr}
-  .chain{flex-wrap:wrap}
-  .chain-node{flex:1 0 70px}
-  .cn-arrow{display:none}
+/* ═══════════════════════════════════════════
+   BOARDROOM TRANSLATION
+═══════════════════════════════════════════ */
+.boardroom{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}
+.br-card{
+  padding:.75rem .9rem;border:.5px solid var(--border);
+  border-radius:6px;background:rgba(255,255,255,.02);text-align:center;
+}
+.br-role{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--amber-bright);opacity:.85;margin-bottom:5px;
+}
+.br-sees{font-size:.7rem;color:var(--text2);line-height:1.4;}
+
+/* ═══════════════════════════════════════════
+   PROOF LIST
+═══════════════════════════════════════════ */
+.proof-list{list-style:none;}
+.proof-list li{
+  display:flex;gap:.75rem;padding:.7rem 0;
+  border-bottom:.5px solid var(--border-faint);
+}
+.proof-list li:last-child{border-bottom:none;}
+.proof-icon{
+  font-family:var(--mono);font-size:.62rem;color:var(--amber-bright);
+  min-width:1.1rem;padding-top:2px;flex-shrink:0;
+}
+.proof-text{font-size:.795rem;line-height:1.6;color:var(--text1);}
+.proof-text strong{color:var(--text0);font-weight:500;}
+
+/* ═══════════════════════════════════════════
+   WHO PAYS
+═══════════════════════════════════════════ */
+.who-pays{
+  font-size:.795rem;color:var(--text1);line-height:1.75;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.page-footer{
+  border-top:.5px solid var(--border);
+  padding-top:1.75rem;margin-top:2.5rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-phrase{
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--text2);
+}
+.footer-contact{text-align:right;}
+.footer-line{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--text2);letter-spacing:.05em;margin-bottom:2px;
+}
+.footer-line a{color:var(--amber-bright);text-decoration:none;}
+
+/* ═══════════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════════ */
+.divider{
+  border:none;border-top:.5px solid var(--border);
+  margin:0;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:600px){
+  .outer{padding:0 1.1rem 3rem;}
+  .two-col{grid-template-columns:1fr;}
+  .boardroom{grid-template-columns:1fr 1fr;}
+  .chain{flex-wrap:wrap;}
+  .chain-node{flex:1 0 70px;}
+  .cn-arrow{display:none;}
+  .nav-date{display:none;}
+  .page-footer{flex-direction:column;align-items:flex-start;}
+  .footer-contact{text-align:left;}
 }
 </style>
+</head>
+<body>
 
-<div class="page">
-  <header class="header">
-    <div class="logo-block">
-      <div class="logo-word">Ukubona LLC</div>
-      <div class="logo-sub">Sovereign Computation · Kampala</div>
+<!-- NAV -->
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark"  src="https://abikesa.github.io/logos/assets/ukubona-dark.png"  alt="Ukubona"/>
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt="Ukubona"/>
     </div>
-    <div class="header-meta">
-      <div class="header-date">26 June 2026</div>
-      <div class="header-event">Old Timerz · Introductory session</div>
+    <div class="nav-brand">
+      Ukubona LLC
+      <span class="nav-date">· Sovereign Computation · Kampala</span>
+    </div>
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle color theme">light</button>
+  </div>
+</nav>
+
+<div class="outer">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <p class="ph-eyebrow">Introductory session · Noesis Hotel, Munyonyo · Saturday 27 June 2026</p>
+    <p class="ph-lede">We reduce the cost of experimentation <em>before</em> decisions become admissions, procurements, budget lines, or policy commitments.</p>
+    <p class="ph-sub">
+      Africa's decisions are <strong>information-poor and action-expensive.</strong>
+      Ukubona builds digital rehearsal environments — from individual clinical twins to national planning frameworks —
+      so organisations can compute risk before spending capital.
+    </p>
+    <div class="meta-row">
+      <span class="meta-chip amber">Ukubona LLC</span>
+      <span class="meta-chip">Kampala, Uganda</span>
+      <span class="meta-chip">Clinical twins · Enterprise twins · National planning</span>
+      <span class="meta-chip">NPA · MOH · Sovereign infrastructure</span>
     </div>
   </header>
 
-  <p class="lede">We reduce the cost of experimentation <em>before</em> decisions become admissions, procurements, budget lines, or policy commitments.</p>
-  <p class="sublede">Africa's decisions are information-poor and action-expensive. Ukubona builds digital rehearsal environments — from individual clinical twins to national planning frameworks — so organisations can compute risk before spending capital.</p>
-
-  <div class="section-label">The compression chain · TMVES</div>
+  <!-- TMVES CHAIN -->
+  <p class="sec-label">The compression chain · TMVES</p>
   <div class="chain">
-    <div class="chain-node t0">
+    <div class="chain-node t-tensor">
       <div class="cn-label">Tensor</div>
       <div class="cn-main">Raw events</div>
       <div class="cn-sub">NDJSON append-only</div>
     </div>
     <div class="cn-arrow">→</div>
-    <div class="chain-node t1">
+    <div class="chain-node t-mid">
       <div class="cn-label">Matrix</div>
       <div class="cn-main">Jacobian</div>
       <div class="cn-sub">sensitivity surface</div>
     </div>
     <div class="cn-arrow">→</div>
-    <div class="chain-node t2">
+    <div class="chain-node t-mid">
       <div class="cn-label">Vector</div>
       <div class="cn-main">Gradients</div>
       <div class="cn-sub">loss landscape</div>
     </div>
     <div class="cn-arrow">→</div>
-    <div class="chain-node t3">
+    <div class="chain-node t-mid">
       <div class="cn-label">Eigenmode</div>
       <div class="cn-main">Signal</div>
       <div class="cn-sub">variance explained</div>
     </div>
     <div class="cn-arrow">→</div>
-    <div class="chain-node t4">
+    <div class="chain-node t-scalar">
       <div class="cn-label">Scalar</div>
       <div class="cn-main">Decision</div>
       <div class="cn-sub">executive summary</div>
     </div>
   </div>
 
-  <div class="section-label">The Oracle · Jacobian sensitivity surface (enterprise twin, live)</div>
+  <hr class="divider" style="margin-top:2rem;"/>
+
+  <!-- JACOBIAN -->
+  <p class="sec-label">The Oracle · Jacobian sensitivity surface (enterprise twin, live)</p>
   <div class="jac-wrap">
     <div class="jac-grid">
       <div class="jac-corner"></div>
       <div class="jac-col-h">Scalar</div>
       <div class="jac-col-h">Equity</div>
       <div class="jac-col-h">Fleet health</div>
-      <div class="jac-col-h">FX rate</div>
+      <div class="jac-col-h">FX rate (UGX)</div>
       <div class="jac-col-h">Risk</div>
 
       <div class="jac-row-h">Bond yield Δ</div>
-      <div class="jac-cell jac-hi">+0.87</div>
-      <div class="jac-cell jac-md">+0.54</div>
-      <div class="jac-cell jac-lo">+0.11</div>
-      <div class="jac-cell jac-hi">+0.82</div>
-      <div class="jac-cell jac-md">+0.61</div>
+      <div class="jac-cell jc-hi">+0.87</div>
+      <div class="jac-cell jc-md">+0.54</div>
+      <div class="jac-cell jc-lo">+0.11</div>
+      <div class="jac-cell jc-hi">+0.82</div>
+      <div class="jac-cell jc-md">+0.61</div>
 
       <div class="jac-row-h">Fleet telemetry</div>
-      <div class="jac-cell jac-md">+0.48</div>
-      <div class="jac-cell jac-lo">+0.22</div>
-      <div class="jac-cell jac-hi">+0.79</div>
-      <div class="jac-cell jac-lo">+0.09</div>
-      <div class="jac-cell jac-neg">–0.31</div>
+      <div class="jac-cell jc-md">+0.48</div>
+      <div class="jac-cell jc-lo">+0.22</div>
+      <div class="jac-cell jc-hi">+0.79</div>
+      <div class="jac-cell jc-lo">+0.09</div>
+      <div class="jac-cell jc-neg">−0.31</div>
 
       <div class="jac-row-h">Dispatch frequency</div>
-      <div class="jac-cell jac-lo">+0.19</div>
-      <div class="jac-cell jac-md">+0.43</div>
-      <div class="jac-cell jac-md">+0.55</div>
-      <div class="jac-cell jac-lo">+0.07</div>
-      <div class="jac-cell jac-neg">–0.18</div>
+      <div class="jac-cell jc-lo">+0.19</div>
+      <div class="jac-cell jc-md">+0.43</div>
+      <div class="jac-cell jc-md">+0.55</div>
+      <div class="jac-cell jc-lo">+0.07</div>
+      <div class="jac-cell jc-neg">−0.18</div>
 
       <div class="jac-row-h">Drug sensitivity (β)</div>
-      <div class="jac-cell jac-neg">–0.41</div>
-      <div class="jac-cell jac-neg">–0.28</div>
-      <div class="jac-cell jac-lo">+0.04</div>
-      <div class="jac-cell jac-lo">+0.01</div>
-      <div class="jac-cell jac-hi">+0.73</div>
+      <div class="jac-cell jc-neg">−0.41</div>
+      <div class="jac-cell jc-neg">−0.28</div>
+      <div class="jac-cell jc-lo">+0.04</div>
+      <div class="jac-cell jc-lo">+0.01</div>
+      <div class="jac-cell jc-hi">+0.73</div>
 
       <div class="jac-row-h">NPA planning horizon</div>
-      <div class="jac-cell jac-md">+0.52</div>
-      <div class="jac-cell jac-hi">+0.68</div>
-      <div class="jac-cell jac-lo">+0.14</div>
-      <div class="jac-cell jac-md">+0.37</div>
-      <div class="jac-cell jac-neg">–0.22</div>
+      <div class="jac-cell jc-md">+0.52</div>
+      <div class="jac-cell jc-hi">+0.68</div>
+      <div class="jac-cell jc-lo">+0.14</div>
+      <div class="jac-cell jc-md">+0.37</div>
+      <div class="jac-cell jc-neg">−0.22</div>
     </div>
-    <p style="font-size:.65rem;color:rgba(245,242,235,.3);margin-top:.6rem;font-family:'DM Mono',monospace">Not prediction — sensitivity. What moves what, and by how much, before capital is committed.</p>
+    <p class="jac-note">Not prediction — sensitivity. What moves what, and by how much, before capital is committed.</p>
   </div>
 
+  <hr class="divider" style="margin-top:2rem;"/>
+
+  <!-- STAT CARDS -->
+  <p class="sec-label">Live system · two twins in production</p>
   <div class="two-col">
     <div class="stat-card">
       <div class="sc-label">Scalar output · Enterprise twin</div>
@@ -185,33 +440,39 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--paper);m
       <div class="sc-desc">Composite decision confidence. Below 45% the system surfaces WATCH; below 30%, STOP — before the board meeting, not after.</div>
     </div>
     <div class="stat-card">
-      <div class="sc-label">Clinical twin · Active</div>
+      <div class="sc-label">Clinical twin · State trace</div>
       <div class="sc-value">67<span class="sc-unit"> events</span></div>
-      <div class="sc-desc">Append-only state trace for a live patient. Polypharmacy Jacobian, pain trajectory, USPSTF gaps — all computable, all auditable.</div>
+      <div class="sc-desc">Append-only ledger for a live patient. Polypharmacy Jacobian, pain trajectory, USPSTF gaps — computable and fully auditable.</div>
     </div>
   </div>
 
-  <div class="section-label">The boardroom translation layer</div>
-  <div class="audience-row">
-    <div class="aud-card">
-      <div class="aud-role">CIO</div>
-      <div class="aud-sees">Sees architecture · NDJSON pipelines, FastAPI, RLS, GitHub transparency</div>
+  <hr class="divider" style="margin-top:2rem;"/>
+
+  <!-- BOARDROOM TRANSLATION -->
+  <p class="sec-label">The boardroom translation layer · his diagnosis, our mechanism</p>
+  <div class="boardroom">
+    <div class="br-card">
+      <div class="br-role">CIO</div>
+      <div class="br-sees">Sees architecture — NDJSON pipelines, FastAPI, RLS, GitHub transparency</div>
     </div>
-    <div class="aud-card">
-      <div class="aud-role">CFO</div>
-      <div class="aud-sees">Sees sensitivity · Jacobian Oracle, risk surfaces, momentum per dollar</div>
+    <div class="br-card">
+      <div class="br-role">CFO</div>
+      <div class="br-sees">Sees sensitivity — Jacobian Oracle, risk surfaces, momentum per dollar</div>
     </div>
-    <div class="aud-card">
-      <div class="aud-role">Board</div>
-      <div class="aud-sees">Gets a scalar · 77.8% WATCH / STOP — mathematical consensus, not opinion</div>
+    <div class="br-card">
+      <div class="br-role">Board</div>
+      <div class="br-sees">Gets a scalar — 77.8% → WATCH / STOP. Mathematical consensus, not opinion.</div>
     </div>
   </div>
 
-  <div class="section-label">Live deployments · Proof of execution</div>
+  <hr class="divider" style="margin-top:2rem;"/>
+
+  <!-- PROOF LIST -->
+  <p class="sec-label">Live deployments · proof of execution</p>
   <ul class="proof-list">
     <li>
       <span class="proof-icon">①</span>
-      <span class="proof-text"><strong>National Planning Authority of Uganda</strong> — TMVES compression applied to Uganda's 20-year development horizon. Tensor of ministry-level inputs compressed to executive scalars for cabinet-level decision rehearsal.</span>
+      <span class="proof-text"><strong>National Planning Authority of Uganda</strong> — TMVES compression applied to Uganda's 20-year development horizon. Ministry-level tensor inputs compressed to executive scalars for cabinet-level decision rehearsal.</span>
     </li>
     <li>
       <span class="proof-icon">②</span>
@@ -219,26 +480,46 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--paper);m
     </li>
     <li>
       <span class="proof-icon">③</span>
-      <span class="proof-text"><strong>Enterprise twin (fleet / market)</strong> — UGX FX volatility modelled against fleet equity in real-time. Simulates capital deployment under Ugandan macroeconomic shocks before a single shilling moves.</span>
+      <span class="proof-text"><strong>Enterprise twin (fleet / market)</strong> — UGX FX base 3720, bond yield 14.1%, modelled against fleet equity in real-time. Rehearses capital deployment under Ugandan macroeconomic shocks before a single shilling moves.</span>
     </li>
     <li>
       <span class="proof-icon">④</span>
-      <span class="proof-text"><strong>Deployment under African constraints</strong> — MTN/Airtel DPI blocking Render/Cloudflare dashboards resolved via WireGuard/WARP tunnel. Append-only NDJSON on GitHub as durable data layer. This system ships in Kampala, not in a sandbox.</span>
+      <span class="proof-text"><strong>Deployed under African constraints</strong> — MTN/Airtel DPI blocking resolved via WireGuard/WARP tunnel. Append-only NDJSON on GitHub as durable data layer. This system ships in Kampala, not in a sandbox.</span>
     </li>
   </ul>
 
-  <div class="section-label">Who pays for rehearsal infrastructure?</div>
-  <p style="font-size:.8rem;color:rgba(245,242,235,.6);line-height:1.65;margin-bottom:2.5rem">
-    Ministries of Health · National planning agencies · Commercial banks and insurers underwriting fleet/enterprise risk · Employers (occupational health twins) · Pension funds and DFIs requiring decision audit trails · Family offices seeking computable risk surfaces in African frontier markets.
+  <hr class="divider" style="margin-top:2rem;"/>
+
+  <!-- WHO PAYS -->
+  <p class="sec-label">Who pays for rehearsal infrastructure?</p>
+  <p class="who-pays">
+    Ministries of Health · National planning agencies · Commercial banks and insurers underwriting fleet and enterprise risk · Employers (occupational health twins) · Pension funds and DFIs requiring decision audit trails · Family offices seeking computable risk surfaces in African frontier markets.
   </p>
 
-  <hr class="divider">
-
-  <div class="closer">
-    <div class="closing-phrase">Okubala si Kulaba.</div>
-    <div class="contact-block">
-      <div class="contact-line">ukubona-llc.github.io</div>
-      <div class="contact-line">Kampala, Uganda</div>
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div class="footer-phrase">Okubala si Kulaba.</div>
+    <div class="footer-contact">
+      <div class="footer-line"><a href="https://ukubona-llc.github.io">ukubona-llc.github.io</a></div>
+      <div class="footer-line">Kampala, Uganda · 2026</div>
     </div>
   </div>
-</div>
+
+</div><!-- /outer -->
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var btn  = document.getElementById('theme-btn');
+  var curr = 'dark';
+  function apply(t){
+    curr = t;
+    html.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'light' : 'dark';
+  }
+  btn.addEventListener('click', function(){ apply(curr === 'dark' ? 'light' : 'dark'); });
+  apply('dark');
+})();
+</script>
+</body>
+</html>
